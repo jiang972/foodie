@@ -10,7 +10,13 @@ public interface StuService {
 
     void saveStu();
 
-    void uodateStu(int id);
+    void updateStu(int id);
 
     void deleteStu(int id);
+
+    /**
+     * 测试方法
+     */
+    public void saveParent();
+    public void saveChildren();
 }
