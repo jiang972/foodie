@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private Sid sid;
 
-    public static final String USER_FACE = "/home/data/111.png";
+    public static final String USER_FACE = "http://www.ym801.com/source/img/doctor_head.png";
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
@@ -60,6 +60,17 @@ public class UserServiceImpl implements UserService {
         users.setCreatedTime(new Date());
         users.setUpdatedTime(new Date());
         usersMapper.insert(users);
+        return users;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public Users queryUserForLogin(String username, String password) {
+        Example userExample = new Example(Users.class);
+        Example.Criteria userExampleCriteria = userExample.createCriteria();
+        userExampleCriteria.andEqualTo("username",username);
+        userExampleCriteria.andEqualTo("password",password);
+        Users users = usersMapper.selectOneByExample(userExample);
         return users;
     }
 }
