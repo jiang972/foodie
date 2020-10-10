@@ -3,6 +3,9 @@ package com.jyx.pojo.bo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * 业务相关的实体类，叫做BO，比如这个就是前端传递的格式
+ */
 @ApiModel(value = "用户对象BO", description = "从客户端，由用户传入的数据封装在此entity中")
 public class UserBO {
 
