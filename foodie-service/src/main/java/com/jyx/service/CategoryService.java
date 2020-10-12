@@ -2,6 +2,7 @@ package com.jyx.service;
 
 import com.jyx.pojo.Category;
 import com.jyx.pojo.vo.CategoryVO;
+import com.jyx.pojo.vo.NewItemsVO;
 
 import java.util.List;
 
@@ -17,4 +18,9 @@ public interface CategoryService {
      * @return
      */
     List<CategoryVO> getSubCatList(Integer rootCatId);
+
+    /**
+     * 查询首页每个一级分类下的6个最新商品数据
+     */
+    List<NewItemsVO> getSixNewItemsLazy(Integer rootCatId);
 }
