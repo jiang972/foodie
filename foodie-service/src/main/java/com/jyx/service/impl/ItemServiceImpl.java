@@ -1,13 +1,9 @@
 package com.jyx.service.impl;
 
-import com.jyx.mapper.ItemsImgMapper;
-import com.jyx.mapper.ItemsMapper;
-import com.jyx.mapper.ItemsParamMapper;
-import com.jyx.mapper.ItemsSpecMapper;
-import com.jyx.pojo.Items;
-import com.jyx.pojo.ItemsImg;
-import com.jyx.pojo.ItemsParam;
-import com.jyx.pojo.ItemsSpec;
+import com.jyx.enums.CommentLevel;
+import com.jyx.mapper.*;
+import com.jyx.pojo.*;
+import com.jyx.pojo.vo.CommentLevelCountsVO;
 import com.jyx.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +24,8 @@ public class ItemServiceImpl implements ItemService {
     private ItemsSpecMapper itemsSpecMapper;
     @Autowired
     private ItemsParamMapper itemsParamMapper;
+    @Autowired
+    private ItemsCommentsMapper itemsCommentsMapper;
 
 
     @Transactional(propagation = Propagation.SUPPORTS)
@@ -66,5 +64,29 @@ public class ItemServiceImpl implements ItemService {
         return itemsParamMapper.selectOneByExample(itemsParamExp);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public CommentLevelCountsVO queryCommentCounts(String itemId) {
+        Integer goodCounts = getCommentCounts(itemId, CommentLevel.GOOD.type);
+        Integer normalCounts = getCommentCounts(itemId, CommentLevel.NORMAL.type);
+        Integer badCounts = getCommentCounts(itemId, CommentLevel.BAD.type);
+        Integer totalCounts = goodCounts+normalCounts+badCounts;
+
+        CommentLevelCountsVO commentLevelCountsVO = new CommentLevelCountsVO();
+        commentLevelCountsVO.setBadCounts(badCounts);
+        commentLevelCountsVO.setGoodCounts(goodCounts);
+        commentLevelCountsVO.setNormalCounts(normalCounts);
+        commentLevelCountsVO.setTotalCounts(totalCounts);
+        return commentLevelCountsVO;
+    }
+
+    Integer getCommentCounts(String itemId,Integer level){
+        ItemsComments condition = new ItemsComments();
+        condition.setItemId(itemId);
+        if (level != null){
+            condition.setCommentLevel(level);
+        }
+        return  itemsCommentsMapper.selectCount(condition);
+    }
 
 }

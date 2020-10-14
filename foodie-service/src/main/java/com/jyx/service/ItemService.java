@@ -4,6 +4,7 @@ import com.jyx.pojo.Items;
 import com.jyx.pojo.ItemsImg;
 import com.jyx.pojo.ItemsParam;
 import com.jyx.pojo.ItemsSpec;
+import com.jyx.pojo.vo.CommentLevelCountsVO;
 
 import java.util.List;
 
@@ -36,5 +37,7 @@ public interface ItemService {
      * @return
      */
     public ItemsParam queryItemParam(String itemId);
+
+    public CommentLevelCountsVO queryCommentCounts(String itemId);
 
 }
