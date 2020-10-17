@@ -5,6 +5,8 @@ import com.jyx.pojo.ItemsImg;
 import com.jyx.pojo.ItemsParam;
 import com.jyx.pojo.ItemsSpec;
 import com.jyx.pojo.vo.CommentLevelCountsVO;
+import com.jyx.pojo.vo.ItemCommentVO;
+import com.jyx.utils.PagedGridResult;
 
 import java.util.List;
 
@@ -15,29 +17,42 @@ public interface ItemService {
      * @param itemId
      * @return
      */
-    public Items queryItemById(String itemId);
+    Items queryItemById(String itemId);
 
     /**
      * 根据商品id查询商品图片列表
      * @param itemId
      * @return
      */
-    public List<ItemsImg> queryItemImgList(String itemId);
+    List<ItemsImg> queryItemImgList(String itemId);
 
     /**
      * 根据商品id查询商品规格
      * @param itemId
      * @return
      */
-    public List<ItemsSpec> queryItemSpecList(String itemId);
+    List<ItemsSpec> queryItemSpecList(String itemId);
 
     /**
      * 根据商品id查询商品参数
      * @param itemId
      * @return
      */
-    public ItemsParam queryItemParam(String itemId);
+    ItemsParam queryItemParam(String itemId);
 
-    public CommentLevelCountsVO queryCommentCounts(String itemId);
+    /**
+     * 根据商品id查询商品评价等级数量
+     * @param itemId
+     * @return
+     */
+    CommentLevelCountsVO queryCommentCounts(String itemId);
+
+    /**
+     * 根据商品id查询商品的评价（分页）
+     * @param itemId
+     * @param level
+     * @return
+     */
+    PagedGridResult queryItemComments(String itemId, Integer level, Integer page, Integer pageSize);
 
 }
