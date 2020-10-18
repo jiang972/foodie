@@ -7,6 +7,7 @@ import com.jyx.mapper.*;
 import com.jyx.pojo.*;
 import com.jyx.pojo.vo.CommentLevelCountsVO;
 import com.jyx.pojo.vo.ItemCommentVO;
+import com.jyx.pojo.vo.SearchItemsVO;
 import com.jyx.service.ItemService;
 import com.jyx.utils.DesensitizationUtil;
 import com.jyx.utils.PagedGridResult;
@@ -103,6 +104,32 @@ public class ItemServiceImpl implements ItemService {
             vo.setNickname(DesensitizationUtil.commonDisplay(vo.getNickname()));
         }
         return setterPagedGrid(itemCommentVOS,page);
+    }
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public PagedGridResult searhItems(String keywords, String sort, Integer page, Integer pageSize) {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("keywords", keywords);
+        map.put("sort", sort);
+
+        PageHelper.startPage(page, pageSize);
+        List<SearchItemsVO> list = itemsCommentsMapperCustom.searchItems(map);
+
+        return setterPagedGrid(list, page);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public PagedGridResult searhItems(Integer catId, String sort, Integer page, Integer pageSize) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("catId", catId);
+        map.put("sort", sort);
+
+        PageHelper.startPage(page, pageSize);
+        List<SearchItemsVO> list = itemsCommentsMapperCustom.searchItemsByThirdCat(map);
+
+        return setterPagedGrid(list, page);
     }
 
     Integer getCommentCounts(String itemId,Integer level){
