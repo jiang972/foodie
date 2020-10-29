@@ -91,7 +91,7 @@
         </choose>
     </select>
 
-    <select id="queryItemsBySpecIds" parameterType="List" resultType="com.imooc.pojo.vo.ShopcartVO">
+    <select id="queryItemsBySpecIds" parameterType="List" resultType="com.jyx.pojo.vo.ShopcartVO">
         SELECT
         t_items.id as itemId,
         t_items.item_name as itemName,
