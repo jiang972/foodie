@@ -33,8 +33,8 @@ public class OrdersController extends BaseController {
     @Autowired
     private OrderService orderService;
 
-    //@Autowired
-    //private RestTemplate restTemplate;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @ApiOperation(value = "用户下单", notes = "用户下单", httpMethod = "POST")
     @PostMapping("/create")
@@ -79,15 +79,15 @@ public class OrdersController extends BaseController {
         HttpEntity<MerchantOrdersVO> entity =
                 new HttpEntity<>(merchantOrdersVO, headers);
 
-//        ResponseEntity<JSONResult> responseEntity =
-//                restTemplate.postForEntity(paymentUrl,
-//                                            entity,
-//                                            JSONResult.class);
-       // JSONResult paymentResult = responseEntity.getBody();
-//        if (paymentResult.getStatus() != 200) {
-//            logger.error("发送错误：{}", paymentResult.getMsg());
-//            return JSONResult.errorMsg("支付中心订单创建失败，请联系管理员！");
-//        }
+        ResponseEntity<JSONResult> responseEntity =
+                restTemplate.postForEntity(paymentUrl,
+                                            entity,
+                                            JSONResult.class);
+        JSONResult paymentResult = responseEntity.getBody();
+        if (paymentResult.getStatus() != 200) {
+            logger.error("发送错误：{}", paymentResult.getMsg());
+            return JSONResult.errorMsg("支付中心订单创建失败，请联系管理员！");
+        }
 
         return JSONResult.ok(orderId);
     }
