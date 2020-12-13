@@ -1,5 +1,9 @@
 package com.jyx.controller;
 
+import com.jyx.pojo.Orders;
+import com.jyx.service.center.MyOrdersService;
+import com.jyx.utils.JSONResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.File;
@@ -22,5 +26,18 @@ public class BaseController {
             File.separator + "foodie" +
             File.separator + "faces";
 
+    @Autowired
+    public MyOrdersService myOrdersService;
+    /**
+     * 用于验证用户和订单是否有关联关系，避免非法用户调用
+     * @return
+     */
+    public JSONResult checkUserOrder(String userId, String orderId) {
+        Orders order = myOrdersService.queryMyOrder(userId, orderId);
+        if (order == null) {
+            return JSONResult.errorMsg("订单不存在！");
+        }
+        return JSONResult.ok(order);
+    }
 
 }
