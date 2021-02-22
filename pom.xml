@@ -132,6 +132,13 @@
             <version>1.7.21</version>
         </dependency>
 
+        <!-- tool -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.5.7</version>
+        </dependency>
+
         <!-- 打包war [3] 添加依赖 -->
         <dependency>
             <groupId>javax.servlet</groupId>
