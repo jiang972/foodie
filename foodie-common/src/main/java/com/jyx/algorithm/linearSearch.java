@@ -1,6 +1,6 @@
 package com.jyx.algorithm;
 
-public class linearSearch<E> {
+public class linearSearch {
 
     private linearSearch(){};
 
@@ -16,12 +16,20 @@ public class linearSearch<E> {
         Integer search = linearSearch.search(data,655);
         System.out.println(search);
 
-        Student student1 = new Student("www");
-        Student student2 = new Student("jyx");
-        Student student3 = new Student("xxx");
         Student student4 = new Student("jyx");
-        Student[] stu = {student1,student2,student3};
+        Student[] stu = { new Student("www"),
+                          new Student("jyx"),
+                          new Student("xxx")};
         Integer search2 = linearSearch.search(stu,student4);
         System.out.println(search2);
+
+        Integer n = 1000000;
+        Integer[] orderData = ArrayGenerator.ArrayOrderGenerator(n);
+        long startTime = System.nanoTime();
+        Integer search3 = linearSearch.search(orderData,n-1);
+        long endTime = System.nanoTime();
+        double duration = (endTime - startTime)/1000000000.0;
+        System.out.println(search3);
+        System.out.println(duration);
     }
 }
