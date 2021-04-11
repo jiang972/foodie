@@ -3,6 +3,8 @@ package com.jyx.algorithm;
 
 import io.swagger.models.auth.In;
 
+import java.util.Arrays;
+
 /**
  * 选择排序：（选择最小的排序）
  * 把最小的拿出来
@@ -21,23 +23,37 @@ public class SelectSort {
      * @param data
      * @return
      */
-    public static Integer[] selectSort(Integer[] data){
-        if (data.length == 0)return data;
+    public static <E extends Comparable<E>>void selectSort(E[] data){
+        if (data.length == 0)return ;
         for (int i = 0; i<data.length; i++){
             Integer min = i;
             for (int j = i+1; j<data.length; j++){
-               if (data[j] < data[min]) min = j;
+               if (data[j].compareTo(data[min]) < 0)
+                   min = j;
             }
-            Integer middle = data[i];
-            data[i] = data[min];
-            data[min] = middle;
+            swap(data,i,min);
         }
-        return data;
+        return ;
     }
 
+    private static <E> void swap(E[] data ,int i,int j){
+        E z = data[i];
+        data[i] = data[j];
+        data[j] = z;
+    }
     public static void main(String[] args) {
-        Integer[] data = {2,3,5,78,3,5,1,2};
-        Integer[] integers = selectSort(data);
-        System.out.println(integers.toString());
+        Integer[] data = ArrayGenerator.GenerateRandomArray(10,100);
+         selectSort(data);
+        for (Integer i : data)
+            System.out.println(i);
+        System.out.println(SortingHelper.checkSort(data));
+
+        Student[] stus = {  new Student("jyx",32),
+                            new Student("sss",11),
+                            new Student("sss",44),
+                            new Student("sss",31)};
+        selectSort(stus);
+        for (Student student : stus)
+            System.out.println(student.toString());
     }
 }

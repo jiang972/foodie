@@ -1,10 +1,12 @@
 package com.jyx.algorithm;
 
-public class Student {
+public class Student  implements Comparable<Student>{
     private String name;
+    private Integer score;
 
-    Student(String name){
+    Student(String name,Integer score){
         this.name = name;
+        this.score = score;
     }
 
     @Override
@@ -19,4 +21,17 @@ public class Student {
         return this.name.equals(stu.name);
     }
 
+    @Override
+    public int compareTo(Student o) {
+        if (this.score == o.score)
+            return 0;
+        else if (this.score < o.score)
+            return -1;
+        return 1;
+    }
+
+    @Override
+    public String toString() {
+        return "name :" + name +" score :" + score;
+    }
 }

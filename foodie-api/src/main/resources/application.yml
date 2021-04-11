@@ -19,6 +19,10 @@ spring:
       pool-name: DateSourceHikariCP
       max-lifetime: 1800000
       connection-test-query: SELECT 1
+  servlet:
+    multipart:
+      max-file-size: 512000     # 文件上传大小限制为500kb
+      max-request-size: 512000  # 请求大小限制为500kb
 mybatis:
   type-aliases-package: com.jyx.pojo
   mapper-locations: classpath:mapper/*.xml

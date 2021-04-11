@@ -16,12 +16,12 @@ public class linearSearch {
         Integer search = linearSearch.search(data,655);
         System.out.println(search);
 
-        Student student4 = new Student("jyx");
-        Student[] stu = { new Student("www"),
-                          new Student("jyx"),
-                          new Student("xxx")};
-        Integer search2 = linearSearch.search(stu,student4);
-        System.out.println(search2);
+//        Student student4 = new Student("jyx");
+//        Student[] stu = { new Student("www"),
+//                          new Student("jyx"),
+//                          new Student("xxx")};
+        //Integer search2 = linearSearch.search(stu,student4);
+        //System.out.println(search2);
 
         Integer n = 1000000;
         Integer[] orderData = ArrayGenerator.ArrayOrderGenerator(n);
